@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Vendedor</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:panel header="Vendedor">
+                <p:messages autoUpdate="true" />
+
+                <h:panelGrid id="grid" columns="2" cellpadding="5">
+                    <h:outputLabel for="name" value="Nome:" style="font-weight:bold"/>
+                    <p:inputText id="name" value="#{vendedorView.vendedor.nome}" required="true" label="Nome"/>
+
+                    <h:outputLabel for="telefone" value="Telefone:" style="font-weight:bold"/>
+                    <p:inputMask id="telefone" mask="(99) 9 9999-9999" value="#{vendedorView.vendedor.telefone}" required="true" label="Telefone"/>
+
+                    <h:outputLabel for="date" value="Data nasc.:" style="font-weight:bold"/>
+                    <p:inputText id="daßßte" value="#{vendedorView.vendedor.dataNascimento}" label="Data nasc.:">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </p:inputText>
+                   
+                </h:panelGrid>
+
+                <p:commandButton value="Salvar" update="grid" icon="ui-icon-check" validateClient="true" style="margin-right:10px"
+                                 actionListener="#{vendedorView.salvar()}"/>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
