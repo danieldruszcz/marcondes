@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition template="/pages/sistema/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="corpo">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-home"></i>
+                Imóvel - Novo! </div>
+            <div class="card-body">
+                <h:form>
+                    <p:messages autoUpdate="true"/>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-9 col-sm-12">
+                                <div class="form-label-group">
+                                    <h:inputText pt:id="inputRua" class="form-control" pt:placeholder="Rua" pt:required="required"
+                                                 value="#{mbNewImovel.novoImovel.rua}" disabled="#{mbNewImovel.isEdit}"/>
+                                    <label for="inputRua">Rua</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-12">
+                                <div class="form-label-group">
+                                    <h:inputText pt:id="inputBairro" class="form-control" pt:placeholder="Bairro" pt:required="required"
+                                                 value="#{mbNewImovel.novoImovel.bairro}" disabled="#{mbNewImovel.isEdit}"/>
+                                    <label for="inputBairro">Bairro</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-12">
+                                <div class="form-label-group">
+                                    <h:inputText pt:id="inputCidade" class="form-control" pt:placeholder="Cidade" pt:required="required"
+                                                 value="#{mbNewImovel.novoImovel.cidade}" disabled="#{mbNewImovel.isEdit}"/>
+                                    <label for="inputCidade">Cidade</label>
+                                </div>
+                            </div>
+                            <div class="col-md-1 col-sm-12">
+                                <div class="form-label-group">
+                                    <h:inputText pt:id="inputUf" class="form-control" pt:placeholder="UF" pt:required="required"
+                                                 value="#{mbNewImovel.novoImovel.uf}" disabled="#{mbNewImovel.isEdit}"/>
+                                    <label for="inputUf">UF</label>
+                                </div>
+                            </div>
+                            <div class="col-md-1 col-sm-12">
+                                <div class="form-label-group">
+                                    <h:inputText pt:id="inputNumero" class="form-control" pt:placeholder="Número" pt:required="required"
+                                                 value="#{mbNewImovel.novoImovel.nr}" disabled="#{mbNewImovel.isEdit}"/>
+                                    <label for="inputNumero">Número</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-12">
+                                <div class="form-label-group">
+                                    <h:inputText pt:id="inputPreco" class="form-control" pt:placeholder="Preço" pt:required="required"
+                                                 value="#{mbNewImovel.novoImovel.preco}" disabled="#{mbNewImovel.isEdit}"/>
+                                    <label for="inputPreco">Preço</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-12">
+                                <div class="form-label-group">
+                                    <h:inputText pt:id="inputDormitorios" class="form-control" pt:placeholder="Dormitórios" pt:required="required"
+                                                 value="#{mbNewImovel.novoImovel.nrDormitorios}" disabled="#{mbNewImovel.isEdit}"/>
+                                    <label for="inputDormitorios">Dormitórios</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-12">
+                                <div class="form-label-group">
+                                    <h:inputText pt:id="inputAreaUtil" class="form-control" pt:placeholder="Área útil (m²)" pt:required="required"
+                                                 value="#{mbNewImovel.novoImovel.areaUtil}" disabled="#{mbNewImovel.isEdit}"/>
+                                    <label for="inputAreaUtil">Área útil (m²)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-12">
+                                <div class="form-label-group">
+                                    <h:inputText pt:id="inputAreaTotal" class="form-control" pt:placeholder="Área total (m²)" pt:required="required"
+                                                 value="#{mbNewImovel.novoImovel.areaTotal}" disabled="#{mbNewImovel.isEdit}"/>
+                                    <label for="inputAreaTotal">Área total (m²)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-12">
+                                <div class="form-element form-select">
+                                    <h:selectOneMenu pt:id="lazer" class="form-element-field" value="#{mbNewImovel.novoImovel.possuiAreaLazer}"
+                                                     disabled="#{mbNewImovel.isEdit}">
+                                        <f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
+                                        <f:selectItem itemLabel="Não" itemValue="0"/>
+                                        <f:selectItem itemLabel="Sim" itemValue="1"/>
+                                    </h:selectOneMenu>
+                                    <label class="form-element-label" for="lazer">Possui área lazer ?</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-12">
+                                <div class="form-element form-select">
+                                    <h:selectOneMenu pt:id="elevador" class="form-element-field" value="#{mbNewImovel.novoImovel.possuiElevador}"
+                                                     disabled="#{mbNewImovel.isEdit}">
+                                        <f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
+                                        <f:selectItem itemLabel="Não" itemValue="0"/>
+                                        <f:selectItem itemLabel="Sim" itemValue="1"/>
+                                    </h:selectOneMenu>
+                                    <label class="form-element-label" for="elevador">Possui elevador ?</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-12">
+                                <div class="form-element form-select">
+                                    <h:selectOneMenu pt:id="garagem" class="form-element-field" value="#{mbNewImovel.novoImovel.possuiGaragem}"
+                                                     disabled="#{mbNewImovel.isEdit}">
+                                        <f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
+                                        <f:selectItem itemLabel="Não" itemValue="0"/>
+                                        <f:selectItem itemLabel="Sim" itemValue="1"/>
+                                    </h:selectOneMenu>
+                                    <label class="form-element-label" for="garagem">Possui garagem ?</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-12">
+                                <div class="form-element form-select">
+                                    <h:selectOneMenu pt:id="suite" class="form-element-field" value="#{mbNewImovel.novoImovel.possuiSuite}"
+                                                     disabled="#{mbNewImovel.isEdit}">
+                                        <f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
+                                        <f:selectItem itemLabel="Não" itemValue="0"/>
+                                        <f:selectItem itemLabel="Sim" itemValue="1"/>
+                                    </h:selectOneMenu>
+                                    <label class="form-element-label" for="suite">Possui suíte ?</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-12">
+                                <div class="form-element form-select">
+                                    <h:selectOneMenu pt:id="finalidade" class="form-element-field" value="#{mbNewImovel.novoImovel.finalidade}"
+                                                     disabled="#{mbNewImovel.isEdit}">
+                                        <f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
+                                        <f:selectItem itemLabel="Residencial" itemValue="1"/>
+                                        <f:selectItem itemLabel="Comercial" itemValue="2"/>
+                                    </h:selectOneMenu>
+                                    <label class="form-element-label" for="finalidade">Finalidade</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-12">
+                                <div class="form-element form-select">
+                                    <h:selectOneMenu pt:id="tipo" class="form-element-field" value="#{mbNewImovel.novoImovel.tipo}"
+                                                     disabled="#{mbNewImovel.isEdit}">
+                                        <f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
+                                        <f:selectItem itemLabel="Venda" itemValue="1"/>
+                                        <f:selectItem itemLabel="Aluguel" itemValue="2"/>
+                                    </h:selectOneMenu>
+                                    <label class="form-element-label" for="tipo">Tipo</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 30px">
+                        <div class="form-row">
+                            <div class="col-md-10 col-sm"></div>
+                            <div class="col-md-2 col-sm-12 btn-bar">
+                                <h:commandLink class="btn btn-success btn-block">Salvar
+                                    <p:ajax listener="#{mbNewImovel.salvar()}" process="@form" update="@form" />
+                                </h:commandLink>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

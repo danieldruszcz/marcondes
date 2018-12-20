@@ -58,7 +58,7 @@ and open the template in the editor.
 
                         <div class="container-login100-form-btn">
                             <h:commandLink class="login100-form-btn">
-                                <p:ajax listener="#{mbLogin.doLogin()}"/>
+                                <p:ajax listener="#{mbLogin.doLogin()}" process="@form"/>
                                 ENTRAR
                             </h:commandLink>
                         </div>

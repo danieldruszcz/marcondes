@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition template="/pages/sistema/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="corpo">
+        <h:form>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-home"></i>
+                    Imóveis</div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-10 col-sm"></div>
+                            <div class="col-md-2 col-sm-12 btn-bar">
+                                <h:commandLink class="btn btn-primary btn-block" action="newImoveis.xhtml">Novo</h:commandLink>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-lg-3 col-md-5 col-sm-12 card_imoveis">
+                                <div class="card_item" id="list1" onmouseenter="showButton('list1')" onmouseleave="hideButton('list1')">
+                                    <img src="https://picsum.photos/500/300/?building" alt="" class="card__img"/>
+                                    <div class="card__body">
+                                        <h3 class="card__title"><i class="fa fa-map-marker-alt"></i> Apartment 1, NY</h3>
+                                        <div class="card__desc">
+                                            <span class="card__desc__room"><i class="fa fa-person-booth"></i> 1</span>
+                                            <span class="card__desc__bed"><i class="fa fa-bed"></i> 2 + 1</span>
+                                            <span class="card__desc__price">$1500 <span class="card__desc__price--small">to</span> $2000</span>
+                                        </div>
+                                    </div>
+                                    <div class="card__buttons">
+                                        <button class="card__buttons--gray btn">Action 1</button> 
+                                        <button class="card__buttons--primary btn">Action 2</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-5 col-sm-12 card_imoveis">
+                                <div class="card_item" id="list2" onmouseenter="showButton('list2')" onmouseleave="hideButton('list2')">
+                                    <img src="https://picsum.photos/500/300/?city" alt="" class="card__img"/>
+                                    <div class="card__body">
+                                        <h3 class="card__title"><i class="fa fa-map-marker-alt"></i> Apartment 2</h3>
+                                        <div class="card__desc">
+                                            <span class="card__desc__room"><i class="fa fa-person-booth"></i> 1</span>
+                                            <span class="card__desc__bed"><i class="fa fa-bed"></i> 2 + 1</span>
+                                            <span class="card__desc__price">P1500 <span class="card__desc__price--small">to</span> P2000</span>
+                                        </div>
+                                    </div>
+                                    <div class="card__buttons">
+                                        <button class="card__buttons--gray btn">Action 1</button> 
+                                        <button class="card__buttons--primary btn">Action 2</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-5 col-sm-12 card_imoveis">
+                                <div class="card_item" id="list3" onmouseenter="showButton('list3')" onmouseleave="hideButton('list3')">
+                                    <img src="https://picsum.photos/700/600/?house" alt="" class="card__img"/>
+                                    <div class="card__body">
+                                        <h3 class="card__title"><i class="fa fa-map-marker-alt"></i> Apartment 3</h3>
+                                        <div class="card__desc">
+                                            <span class="card__desc__room"><i class="fa fa-person-booth"></i> 1</span>
+                                            <span class="card__desc__bed"><i class="fa fa-bed"></i> 2 + 1</span>
+                                            <span class="card__desc__price">P1500 <span class="card__desc__price--small">to</span> P2000</span>
+                                        </div>
+                                    </div>
+                                    <div class="card__buttons">
+                                        <button class="card__buttons--gray btn">Action 1</button> 
+                                        <button class="card__buttons--primary btn">Action 2</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-5 col-sm-12 card_imoveis">
+                                <div class="card_item" id="list4" onmouseenter="showButton('list4')" onmouseleave="hideButton('list4')">
+                                    <img src="https://picsum.photos/700/600/?house" alt="" class="card__img"/>
+                                    <div class="card__body">
+                                        <h3 class="card__title"><i class="fa fa-map-marker-alt"></i> Apartment 4</h3>
+                                        <div class="card__desc">
+                                            <span class="card__desc__room"><i class="fa fa-person-booth"></i> 1</span>
+                                            <span class="card__desc__bed"><i class="fa fa-bed"></i> 2 + 1</span>
+                                            <span class="card__desc__price">P1500 <span class="card__desc__price--small">to</span> P2000</span>
+                                        </div>
+                                    </div>
+                                    <div class="card__buttons">
+                                        <button class="card__buttons--gray btn">Action 1</button> 
+                                        <button class="card__buttons--primary btn">Action 2</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p:dataTable var="imovel" value="#{mbListImoveis.listImoveis}">
+                        <p:column headerText="Id">
+                            <h:outputText value="#{imovel.id}" />
+                        </p:column>
+
+                        <p:column headerText="Bairro">
+                            <h:outputText value="#{imovel.bairro}" />
+                        </p:column>
+
+                        <p:column headerText="Cidade">
+                            <h:outputText value="#{imovel.cidade}" />
+                        </p:column>
+
+                        <p:column headerText="UF">
+                            <h:outputText value="#{imovel.uf}" />
+                        </p:column>
+
+                        <p:column headerText="Rua">
+                            <h:outputText value="#{imovel.rua}" />
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

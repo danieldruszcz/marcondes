@@ -19,7 +19,7 @@ public class Conexao {
     private EntityManager entityManager = null;
 
     public EntityManager getEntityManager() {
-        factory = Persistence.createEntityManagerFactory("gerenciadorWS");
+        factory = Persistence.createEntityManagerFactory("gerenciadorWsPU");
         entityManager = factory.createEntityManager();
         return entityManager;
     }

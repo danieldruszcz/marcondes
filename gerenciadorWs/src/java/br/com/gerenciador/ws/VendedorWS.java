@@ -47,6 +47,7 @@ public class VendedorWS {
     public Vendedor salvar(Vendedor vendedor) throws Exception {
         VendedorDAO dao = new VendedorDAO();
         try {
+            System.out.println("Vendedor " + vendedor.getNome());
             dao.save(vendedor);
             return vendedor;
         } catch (Exception ex) {

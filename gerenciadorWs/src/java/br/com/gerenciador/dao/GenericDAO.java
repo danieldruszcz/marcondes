@@ -28,6 +28,8 @@ public abstract class GenericDAO<T, I extends Serializable> {
             em.getTransaction().begin();
             saved = em.merge(entity);
             em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             this.conexao.finalize();
         }
@@ -71,6 +73,16 @@ public abstract class GenericDAO<T, I extends Serializable> {
             conexao = new Conexao();
         }
         return conexao.getEntityManager();
+    }
+
+    protected Object selectUnique(String query) {
+        try {
+            System.out.println("Query " + query);
+            return getEntityManager().createQuery(query).getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
