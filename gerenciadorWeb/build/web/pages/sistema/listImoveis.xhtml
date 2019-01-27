@@ -7,7 +7,8 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:jsf="http://xmlns.jcp.org/jsf"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:m="http://java.sun.com/jsf/composite/components">
 
     <ui:define name="corpo">
         <h:form>
@@ -27,8 +28,9 @@
                     <div class="form-group">
                         <div class="form-row">
                             <c:forEach items="#{mbListImoveis.listImoveis}" var="item" >
-                                <div class="col-lg-3 col-md-5 col-sm-12 card_imoveis">
-                                    <div class="card_item" id="list#{item.id}" onmouseenter="showButton('list#{item.id}')" onmouseleave="hideButton('list#{item.id}')">
+                                <m:card value="#{item}" />
+<!--                                <div class="col-lg-3 col-md-5 col-sm-12 card_imoveis" onclick="window.open('newImoveis.xhtml?id=#{item.id}')">
+                                    <div class="card_item" id="list#{item.id}" >
                                         <img src="https://picsum.photos/500/300/?building" alt="" class="card__img"/>
                                         <div class="card__body">
                                             <h3 class="card__title"><i class="fa fa-map-marker-alt"></i>#{item.rua} - #{item.nr}, #{item.bairro} • #{item.cidade} - #{item.uf}</h3>
@@ -39,26 +41,11 @@
                                             <span class="card__desc__price">R$ #{item.preco}</span>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                             </c:forEach>
                         </div>
                     </div>
-                    <ul class="pagination" role="menubar" aria-label="Pagination">
-                        <li><a href=""><i class="fas fa-angle-double-left"></i><span>First</span></a></li>
-                        <li><a href=""><i class="fas fa-angle-left"></i><span>Previous</span></a></li>
-                        <li><a href="">1</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li class="current"><a href="">4</a></li>
-                        <li><a href="">5</a></li>
-                        <li><a href="">6</a></li>
-                        <li><a href="">7</a></li>
-                        <li><a href="">8</a></li>
-                        <li><a href="">9</a></li>
-                        <li><a href="">10</a></li>
-                        <li><a href=""><i class="fas fa-angle-right"></i><span>Next</span></a></li>
-                        <li><a href=""><i class="fas fa-angle-double-right"></i><span>Last</span></a></li>
-                    </ul>  
+                    <m:paginator pages="#{mbListImoveis.paginas}" />
                 </div>
             </div>
         </h:form>

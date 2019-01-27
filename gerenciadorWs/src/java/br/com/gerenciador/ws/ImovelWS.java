@@ -11,8 +11,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -37,16 +39,30 @@ public class ImovelWS {
             throw ex;
         }
     }
-    
-     
+       
     @POST
     @Path("/list")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Imovel> list(Imovel imovel) throws Exception {
+    public List<Imovel> list() throws Exception {
         ImovelDAO dao = new ImovelDAO();
         try {
             return dao.getAll(Imovel.class);
+        } catch (Exception ex) {
+            Logger.getLogger(ImovelWS.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+    }
+        
+    @GET
+    @Path("/getById/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Imovel getById(@PathParam("id") Long id) throws Exception {
+        ImovelDAO dao = new ImovelDAO();
+        System.out.println("Id " + id);
+        try {
+            return dao.getById(id);
         } catch (Exception ex) {
             Logger.getLogger(ImovelWS.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;

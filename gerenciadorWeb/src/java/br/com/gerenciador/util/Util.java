@@ -19,6 +19,11 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -78,6 +83,37 @@ public class Util {
         }
     }
 
+    public static String sendGet(String action) throws IOException {
+
+        try {
+            // Cria um objeto HttpURLConnection:
+            HttpURLConnection request = (HttpURLConnection) new URL(HOST + action).openConnection();
+
+            try {
+                // Define que a conexão pode enviar informações e obtê-las de volta:
+                request.setDoOutput(true);
+                request.setDoInput(true);
+
+                // Define o content-type:
+                request.setRequestProperty("Content-Type", "application/json");
+
+                // Define o método da requisição:
+                request.setRequestMethod("GET");
+
+                // Conecta na URL:
+                request.connect();
+
+                // Caso você queira usar o código HTTP para fazer alguma coisa, descomente esta linha.
+                //int response = request.getResponseCode();
+                return readResponse(request);
+            } finally {
+                request.disconnect();
+            }
+        } catch (IOException ex) {
+            throw ex;
+        }
+    }
+
     private static String readResponse(HttpURLConnection request) throws IOException {
         ByteArrayOutputStream os;
         try (InputStream is = request.getInputStream()) {
@@ -89,12 +125,12 @@ public class Util {
         }
         return new String(os.toByteArray());
     }
-    
+
     public static Object jsonToObject(String jsonText, Class classe) throws IOException {
-        
-            Gson json = new Gson();
-            return json.fromJson(jsonText, classe);
-        
+
+        Gson json = new Gson();
+        return json.fromJson(jsonText, classe);
+
     }
 
     public static Object readJsonFromUrl(String action, Class classe) throws IOException {
@@ -116,5 +152,18 @@ public class Util {
             sb.append((char) cp);
         }
         return sb.toString();
+    }
+
+    public static Long getIdFromRequest(ExternalContext ec) {
+        Long id = null;
+        if (ec != null && ec.getRequestParameterMap() != null && ec.getRequestParameterMap().get("id") != null) {
+            id = Long.parseLong(ec.getRequestParameterMap().get("id"));
+        }
+        return id;
+    }
+
+    public static <T> List<T> jsonToArray(String s, Class<T[]> clazz) {
+        T[] arr = new Gson().fromJson(s, clazz);
+        return Arrays.asList(arr); //or return Arrays.asList(new Gson().fromJson(s, clazz)); for a one-liner
     }
 }

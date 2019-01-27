@@ -27,6 +27,7 @@ public class MbListImoveis implements Serializable{
     private List<Imovel> listImoveis;
     private Imovel filtro = new Imovel();
     private ImovelDAO dao;
+    private Integer paginas = 24;
     
     @PostConstruct
     public void init(){
@@ -52,6 +53,14 @@ public class MbListImoveis implements Serializable{
 
     public void setFiltro(Imovel filtro) {
         this.filtro = filtro;
+    }
+
+    public Integer getPaginas() {
+        return paginas;
+    }
+
+    public void setPaginas(Integer paginas) {
+        this.paginas = paginas;
     }
     
     

@@ -673,21 +673,6 @@ div.card_imoveis{
   background: #008cff;
 }
 
-.wrapper{
-  margin: 60px auto;
-  text-align: center;
-}
-h1{
-  margin-bottom: 1.25em;
-}
-#pagination-demo{
-  display: inline-block;
-  margin-bottom: 1.75em;
-}
-#pagination-demo li{
-  display: inline-block;
-}
-
 .page-content{
   background: #eee;
   display: inline-block;
@@ -697,6 +682,7 @@ h1{
 }
 
 .pagination,
+.pagination > span,
 .pagination li a {
   display: flex;
   flex-wrap: wrap;
@@ -706,7 +692,7 @@ h1{
 
 .pagination li { background: linear-gradient(-135deg, #c7121b, #c75b09); }
 
-.pagination a {
+.pagination a, .pagination .group a {
   font-weight: 600;
   padding-top: 1px;
   text-decoration:none;  
@@ -718,19 +704,21 @@ h1{
   box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,.35);
 }
 
-.pagination li:not([class*="current"]) a:hover { 
+.pagination .group li a:not([class*="current"]):hover { 
   background-color: rgba(255,255,255,.2);
   border-top-color: rgba(0,0,0,.35);
   border-bottom-color: rgba(0,0,0,.5);
+  color: rgba(255,255,255,.85);
+  cursor: pointer;
 }
 
-.pagination li:not([class*="current"]) a:focus,
-.pagination li:not([class*="current"]) a:active {;
+.pagination .group li a:not([class*="current"]):focus,
+.pagination .group li a:not([class*="current"]):active {;
   box-shadow: 0px 0px 10px 1px rgba(0,0,0,.25);
   border-left-width:1px;
 }
 
-.pagination li:first-of-type a {
+.pagination .group li:first-of-type a {
   border-left-width: 1px;
 }
 
@@ -759,7 +747,7 @@ h1{
   transform: translate(0, 0);
 }
 
-.pagination li.current a { 
+.pagination li a.current { 
   padding-top:.25em;
   color: rgba(255,255,255,1);
   background-color: rgba(255,255,255,.15);
@@ -800,6 +788,11 @@ h1{
   }
 
   .pagination li:nth-of-type(2) a { border-left-width: 0; }
+  
+   .arrow-steps .step{
+      width: 100%;
+      margin-bottom: 7px !important;
+  }
 
 }
 
@@ -816,19 +809,90 @@ h1{
   }
 
   .pagination li:nth-of-type(2) a { border-left-width: 1px; }
+  
 
 }
 
-@media only screen and ( max-width: 15.063em ) {  /* For watches? */
-  
-  .pagination li { width: 50%;}
-  
-  .pagination li.current { 
-    order: 2;
-    width: 100%;
-    border-left-width: 1px;
-      
-  }  
+.arrow-steps .step {
+	font-size: 14px;
+	text-align: center;
+	color: #666;
+	cursor: default;
+	margin: 0 3px;
+	padding: 10px 10px 10px 30px;
+	min-width: 180px;
+	float: left;
+	position: relative;
+	background-color: #d9e3f7;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none; 
+  transition: background-color 0.2s ease;
+}
 
+.arrow-steps .step:after,
+.arrow-steps .step:before {
+	content: " ";
+	position: absolute;
+	top: 0;
+	right: -17px;
+	width: 0;
+	height: 0;
+	border-top: 19px solid transparent;
+	border-bottom: 23px solid transparent;
+	border-left: 17px solid #d9e3f7;	
+	z-index: 2;
+  transition: border-color 0.2s ease;
+}
+
+.arrow-steps .step:before {
+	right: auto;
+	left: 0;
+	border-left: 17px solid #fff;	
+	z-index: 0;
+}
+
+.arrow-steps .step:first-child:before {
+	border: none;
+}
+
+.arrow-steps .step:first-child {
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+.arrow-steps .step span {
+	position: relative;
+}
+
+.arrow-steps .step span:before {
+	opacity: 0;
+	content: "✔";
+	position: absolute;
+	top: -2px;
+	left: -20px;
+}
+
+.arrow-steps .step.done span:before {
+	opacity: 1;
+	-webkit-transition: opacity 0.3s ease 0.5s;
+	-moz-transition: opacity 0.3s ease 0.5s;
+	-ms-transition: opacity 0.3s ease 0.5s;
+	transition: opacity 0.3s ease 0.5s;
+}
+
+.arrow-steps .step.current {
+	color: #fff;
+	background-color: #23468c;
+}
+
+.arrow-steps .step.current:after {
+	border-left: 17px solid #23468c;	
+}
+
+.arrow-steps{
+    float: right;
+    padding-right: 15px;
 }
 

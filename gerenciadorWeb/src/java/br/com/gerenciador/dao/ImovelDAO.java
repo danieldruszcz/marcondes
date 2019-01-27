@@ -22,6 +22,11 @@ public class ImovelDAO implements Serializable{
         Gson g = new Gson();
         String filtroJson = g.toJson(filtro);
         String jsonResponse = Util.sendPost("imovel/list", filtroJson);
-        return (List<Imovel>) Util.jsonToObject(jsonResponse, List.class);
+        return (List<Imovel>) Util.jsonToArray(jsonResponse, Imovel[].class);
+    }
+    
+    public Imovel getImovel(Long id) throws IOException{
+        String jsonResponse = Util.sendGet("imovel/getById/" + id);
+        return (Imovel) Util.jsonToObject(jsonResponse, Imovel.class);
     }
 }

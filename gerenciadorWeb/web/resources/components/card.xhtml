@@ -1,0 +1,30 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:f = "http://java.sun.com/jsf/core"
+      xmlns:composite = "http://java.sun.com/jsf/composite">
+
+    <composite:interface>
+        <composite:attribute name="value" required="true"
+                             type="java.lang.Object"/>
+    </composite:interface>
+
+    <composite:implementation>
+        <div class="col-lg-3 col-md-5 col-sm-12 card_imoveis" onclick="window.open('newImoveis.xhtml?id=#{item.id}')">
+            <div class="card_item" id="list#{cc.attrs.value.id}" >
+                <img src="https://picsum.photos/500/300/?building" alt="" class="card__img"/>
+                <div class="card__body">
+                    <h3 class="card__title"><i class="fa fa-map-marker-alt"></i>#{cc.attrs.value.rua} - #{cc.attrs.value.nr}, #{cc.attrs.value.bairro} • #{cc.attrs.value.cidade} - #{cc.attrs.value.uf}</h3>
+                    <div class="card__desc">
+                        <span class="card__desc__room"><i class="fas fa-sign"></i> #{cc.attrs.value.areaUtil} - #{cc.attrs.value.areaTotal} m²</span>
+                        <span class="card__desc__bed"><i class="fa fa-bed"></i> #{cc.attrs.value.nrDormitorios} #{cc.attrs.value.possuiSuite eq 1 ? ' + 1' : ''}</span>
+                    </div>
+                    <span class="card__desc__price">R$ #{cc.attrs.value.preco}</span>
+                </div>
+            </div>
+        </div>
+    </composite:implementation>
+</html>
