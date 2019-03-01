@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition template="/pages/sistema/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:m="http://java.sun.com/jsf/composite/components"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="corpo">
+        <h:form id="formListProcessos">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-home"></i>
+                    Obras</div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-10 col-sm"></div>
+                            <div class="col-md-2 col-sm-12 btn-bar">
+                                <h:commandLink class="btn btn-primary btn-block" action="newProcessos.xhtml">Novo</h:commandLink>
+                            </div>
+                        </div>
+                    </div>
+                    <p:panel header="Filtros" toggleable="true" collapsed="true">
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-label-group">
+                                        <h:inputText pt:id="inputDescricao" class="form-control" pt:placeholder="Descrição" 
+                                                     value="#{mbListProcessos.p.filter.descricao}"/>
+                                        <label for="inputDescricao">Descrição</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-10 col-sm"></div>
+                                <div class="col-md-2 col-sm-12 btn-bar">
+                                    <h:commandLink class="btn btn-primary btn-block" style="color: white">
+                                        <p:ajax listener="#{mbListProcessos.pesquisar()}" process="@form" update="@form"/>
+                                        Pesquisar
+                                    </h:commandLink>
+                                </div>
+                            </div>
+                        </div>
+                    </p:panel>
+                    <div class="form-group" jsf:id="itens">
+                        <div class="form-row">
+                            <p:dataTable value="#{mbListProcessos.listResultados}" var="item" emptyMessage="Não foram encontrados registros.">
+                                <p:column headerText="Descrição">#{item.descricao}</p:column>
+                                <p:column width="60"><p:button icon="ui-icon-search" outcome="newProcessos.xhtml?id=#{item.id}"/></p:column>
+                            </p:dataTable>
+                        </div>
+                    </div>
+                    <m:paginator id="paginator" formId="formListProcessos" bean="#{mbListProcessos}" />
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

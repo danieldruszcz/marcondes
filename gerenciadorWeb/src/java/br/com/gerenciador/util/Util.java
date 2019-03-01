@@ -158,6 +158,7 @@ public class Util {
         Long id = null;
         if (ec != null && ec.getRequestParameterMap() != null && ec.getRequestParameterMap().get("id") != null) {
             id = Long.parseLong(ec.getRequestParameterMap().get("id"));
+            //ec.getRequestParameterMap().clear();
         }
         return id;
     }

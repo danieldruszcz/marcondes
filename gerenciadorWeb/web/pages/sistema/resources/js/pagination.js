@@ -14,9 +14,10 @@ var Pagination = {
     // converting initialize data
     Extend: function (data) {
         data = data || {};
-        Pagination.size = data.size || 300;
+        Pagination.size = data.size || 1;
         Pagination.page = data.page || 1;
         Pagination.step = data.step || 3;
+        Pagination.formId = data.formId;
     },
 
     // add pages by number (from [s] to [f])
@@ -43,6 +44,9 @@ var Pagination = {
     // change page
     Click: function () {
         Pagination.page = +this.innerHTML;
+        console.log(Pagination.page)
+        document.getElementById(Pagination.formId + ":paginator:x").value = Pagination.page;
+        changePage();
         Pagination.Start();
     },
 
@@ -52,7 +56,10 @@ var Pagination = {
         if (Pagination.page < 1) {
             Pagination.page = 1;
         }
+        document.getElementById(Pagination.formId + ":paginator:x").value = Pagination.page;
+        changePage();
         Pagination.Start();
+        console.log('a' + Pagination.page);
     },
 
     // next page
@@ -61,7 +68,11 @@ var Pagination = {
         if (Pagination.page > Pagination.size) {
             Pagination.page = Pagination.size;
         }
+        console.log('a' + Pagination.page);
+        document.getElementById(Pagination.formId + ":paginator:x").value = Pagination.page;
+        changePage();
         Pagination.Start();
+        console.log('a' + Pagination.page);
     },
 
     // --------------------
@@ -118,9 +129,9 @@ var Pagination = {
     Create: function (e) {
 
         var html = [
-            '<li><a href=""><i class="fas fa-angle-left"></i></a></li>', // previous button
+            '<li><a><i class="fas fa-angle-left"></i></a></li>', // previous button
             '<span class="group"></span>', // pagination container
-            '<li><a href=""><i class="fas fa-angle-right"></i></a></li>'  // next button
+            '<li><a><i class="fas fa-angle-right"></i></a></li>'  // next button
         ];
 
         e.innerHTML = html.join('');
@@ -141,11 +152,12 @@ var Pagination = {
 /* * * * * * * * * * * * * * * * *
  * Initialization
  * * * * * * * * * * * * * * * * */
-function initPagination (size, page) {
+function initPagination (size, formId) {
     Pagination.Init(document.getElementById('pagination'), {
         size: size, // pages size
-        page: page, // selected page
-        step: 3   // pages before and after current
+        page: 1, // selected page
+        step: 3,   // pages before and after current
+        formId: formId
     });
 };
 

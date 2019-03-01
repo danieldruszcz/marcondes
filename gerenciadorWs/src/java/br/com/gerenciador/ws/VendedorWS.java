@@ -16,20 +16,6 @@ import javax.ws.rs.core.MediaType;
 @Path("/vendedor")
 public class VendedorWS {
 
-    @GET
-    @Path("/{name}")
-    public void salvar(@PathParam("name") String name) {
-        Vendedor v = new Vendedor();
-        v.setNome(name);
-        v.setTelefone("(42) 2424-2424");
-        v.setDataNascimento(new Date());
-        VendedorDAO dao = new VendedorDAO();
-        try {
-            dao.save(v);
-        } catch (Exception ex) {
-            Logger.getLogger(VendedorWS.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     @GET
     @Path("/pesquisar/{id}")

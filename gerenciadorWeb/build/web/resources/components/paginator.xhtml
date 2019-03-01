@@ -5,19 +5,24 @@
 <html xmlns = "http://www.w3.org/1999/xhtml"   
       xmlns:h = "http://java.sun.com/jsf/html"
       xmlns:f = "http://java.sun.com/jsf/core"
-      xmlns:composite = "http://java.sun.com/jsf/composite">
+      xmlns:composite = "http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui">
 
     <composite:interface>
-        <composite:attribute name = "pages" required="true" />
-    </composite:interface>
+        <composite:attribute name="bean" required="true"
+                             type="java.lang.Object"/>
+        <composite:attribute name="formId" required="true"/>
+    </composite:interface>'
 
     <composite:implementation>
+        <p:remoteCommand name="changePage" action="#{cc.attrs.bean.changePage()}" update="#{cc.attrs.formId}:itens"/>
+        <h:inputHidden id="x" value="#{cc.attrs.bean.p.page}" />
         <script src="./resources/js/pagination.js"></script>
-
+        
         <ul id="pagination" class="pagination"></ul>
         <script>
 
-            initPagination(#{cc.attrs.pages}, 1);
+            initPagination(#{cc.attrs.bean.p.pages}, '#{cc.attrs.formId}');
 
 
         </script>

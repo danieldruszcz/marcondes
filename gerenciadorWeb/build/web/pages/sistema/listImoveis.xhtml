@@ -8,10 +8,11 @@
                 xmlns:jsf="http://xmlns.jcp.org/jsf"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-                xmlns:m="http://java.sun.com/jsf/composite/components">
+                xmlns:m="http://java.sun.com/jsf/composite/components"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:define name="corpo">
-        <h:form>
+        <h:form id="formListImoveis">
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-home"></i>
@@ -25,27 +26,45 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="form-row">
-                            <c:forEach items="#{mbListImoveis.listImoveis}" var="item" >
-                                <m:card value="#{item}" />
-<!--                                <div class="col-lg-3 col-md-5 col-sm-12 card_imoveis" onclick="window.open('newImoveis.xhtml?id=#{item.id}')">
-                                    <div class="card_item" id="list#{item.id}" >
-                                        <img src="https://picsum.photos/500/300/?building" alt="" class="card__img"/>
-                                        <div class="card__body">
-                                            <h3 class="card__title"><i class="fa fa-map-marker-alt"></i>#{item.rua} - #{item.nr}, #{item.bairro} • #{item.cidade} - #{item.uf}</h3>
-                                            <div class="card__desc">
-                                                <span class="card__desc__room"><i class="fas fa-sign"></i> #{item.areaUtil} - #{item.areaTotal} m²</span>
-                                                <span class="card__desc__bed"><i class="fa fa-bed"></i> #{item.nrDormitorios} #{item.possuiSuite eq 1 ? ' + 1' : ''}</span>
-                                            </div>
-                                            <span class="card__desc__price">R$ #{item.preco}</span>
-                                        </div>
+                    <p:panel header="Filtros" toggleable="true" collapsed="true">
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-label-group">
+                                        <h:inputText pt:id="inputRua" class="form-control" pt:placeholder="Rua" 
+                                                     value="#{mbListImoveis.p.filter.rua}"/>
+                                        <label for="inputRua">Rua</label>
                                     </div>
-                                </div>-->
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-label-group">
+                                        <h:inputText pt:id="inputCidade" class="form-control" pt:placeholder="Cidade" 
+                                                     value="#{mbListImoveis.p.filter.cidade}"/>
+                                        <label for="inputCidade">Cidade</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-10 col-sm"></div>
+                                <div class="col-md-2 col-sm-12 btn-bar">
+                                    <h:commandLink class="btn btn-primary btn-block" style="color: white">
+                                        <p:ajax listener="#{mbListImoveis.pesquisar()}" process="@form" update="@form"/>
+                                        Pesquisar
+                                    </h:commandLink>
+                                </div>
+                            </div>
+                        </div>
+                    </p:panel>
+                    <div class="form-group" jsf:id="itens">
+                        <div class="form-row">
+                            <c:forEach items="#{mbListImoveis.listResultados}" var="item" >
+                                <m:card value="#{item}" />
                             </c:forEach>
                         </div>
                     </div>
-                    <m:paginator pages="#{mbListImoveis.paginas}" />
+                    <m:paginator id="paginator" formId="formListImoveis" bean="#{mbListImoveis}" />
                 </div>
             </div>
         </h:form>

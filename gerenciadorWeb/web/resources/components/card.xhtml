@@ -13,7 +13,7 @@
     </composite:interface>
 
     <composite:implementation>
-        <div class="col-lg-3 col-md-5 col-sm-12 card_imoveis" onclick="window.open('newImoveis.xhtml?id=#{item.id}')">
+        <div class="col-lg-3 col-md-5 col-sm-12 card_imoveis" onclick="location.href = 'newImoveis.xhtml?id=#{item.id}'">
             <div class="card_item" id="list#{cc.attrs.value.id}" >
                 <img src="https://picsum.photos/500/300/?building" alt="" class="card__img"/>
                 <div class="card__body">

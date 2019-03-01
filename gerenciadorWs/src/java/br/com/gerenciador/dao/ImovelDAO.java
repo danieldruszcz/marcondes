@@ -6,19 +6,30 @@
 package br.com.gerenciador.dao;
 
 import br.com.gerenciador.entity.Imovel;
-import java.util.List;
 
 /**
  *
  * @author danieldruszcz
  */
 public class ImovelDAO extends GenericDAO<Imovel, Long> {
-    
+
     public Imovel getById(Long id) {
         return super.getById(Imovel.class, id);
     }
 
-    public List<Imovel> getListVendedor() {
-        return super.getAll(Imovel.class);
+    public String getQuery(Imovel filtro) {
+        StringBuilder sql = new StringBuilder();
+        sql.append("Imovel o ");
+        sql.append("where o.id > 0 ");
+        if (filtro != null) {
+            if (filtro.getRua() != null && !filtro.getRua().isEmpty()) {
+                sql.append(" and o.rua like '%").append(filtro.getRua()).append("%'");
+            }
+            if (filtro.getCidade() != null && !filtro.getCidade().isEmpty()) {
+                sql.append(" and o.cidade = " + filtro.getCidade());
+            }
+        }
+        System.out.println("Query " + sql.toString());
+        return sql.toString();
     }
 }

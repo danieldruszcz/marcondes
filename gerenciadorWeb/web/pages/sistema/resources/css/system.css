@@ -482,7 +482,7 @@ div.btn-bar.new{
   opacity: 0.001;
   transition: opacity 0.28s ease;
   will-change: opacity;
-  padding-left: 5px;
+  padding-left: 6px;
 }
 
 .form-element-field:-ms-input-placeholder {
@@ -559,6 +559,11 @@ select.form-element-field {
   -moz-appearance: none;
   appearance: none;
   cursor: pointer;
+}
+
+select.form-element-field:disabled, .form-control:disabled{
+   background-color: white !important;
+   opacity: 1;
 }
 
 .form-select-placeholder {
@@ -683,7 +688,7 @@ div.card_imoveis{
 
 .pagination,
 .pagination > span,
-.pagination li a {
+.pagination li a{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -692,7 +697,7 @@ div.card_imoveis{
 
 .pagination li { background: linear-gradient(-135deg, #c7121b, #c75b09); }
 
-.pagination a, .pagination .group a {
+.pagination a, .pagination .group a, .pagination a:not([href]) {
   font-weight: 600;
   padding-top: 1px;
   text-decoration:none;  
@@ -700,7 +705,7 @@ div.card_imoveis{
   border-left-width: 0;
   min-width:44px;
   min-height:44px;
-  color: rgba(255,255,255,.85);  
+  color: rgba(255,255,255,.85) !important;  
   box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,.35);
 }
 
@@ -896,3 +901,19 @@ div.card_imoveis{
     padding-right: 15px;
 }
 
+.sit{
+    padding-right: 0;
+}
+
+.ui-widget-header, .ui-column-title{
+    font-size: 15px;
+}
+
+.ui-datatable-tablewrapper{
+    margin-top: 15px;
+}
+
+.ui-datatable{
+    padding: 0 6px;
+    font-size: 16px;
+}

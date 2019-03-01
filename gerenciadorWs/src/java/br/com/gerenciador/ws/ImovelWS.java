@@ -7,6 +7,7 @@ package br.com.gerenciador.ws;
 
 import br.com.gerenciador.dao.ImovelDAO;
 import br.com.gerenciador.entity.Imovel;
+import br.com.gerenciador.util.Paginator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,6 +40,22 @@ public class ImovelWS {
             throw ex;
         }
     }
+         
+    @POST
+    @Path("/search/{first}/{itens}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Imovel> list(@PathParam("first") int first, @PathParam("itens") int itens, Imovel imovel) throws Exception {
+        ImovelDAO dao = new ImovelDAO();
+        try {
+            System.out.println("T 2 " + first + "last " + itens);
+            Paginator paginator = new Paginator(first, itens, imovel);
+            return dao.pesquisar(paginator);
+        } catch (Exception ex) {
+            Logger.getLogger(ImovelWS.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+    }
        
     @POST
     @Path("/list")
@@ -56,13 +73,26 @@ public class ImovelWS {
         
     @GET
     @Path("/getById/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Imovel getById(@PathParam("id") Long id) throws Exception {
         ImovelDAO dao = new ImovelDAO();
-        System.out.println("Id " + id);
         try {
             return dao.getById(id);
+        } catch (Exception ex) {
+            Logger.getLogger(ImovelWS.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+    }
+         
+    @POST
+    @Path("/count")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public Integer count(Imovel imovel) throws Exception {
+        ImovelDAO dao = new ImovelDAO();
+        try {
+            System.out.println("T " + imovel.getRua());
+            return dao.count(imovel);
         } catch (Exception ex) {
             Logger.getLogger(ImovelWS.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;

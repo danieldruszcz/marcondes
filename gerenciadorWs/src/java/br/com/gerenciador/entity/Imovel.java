@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -22,10 +23,13 @@ import javax.persistence.Table;
 public class Imovel implements Serializable{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "imovel_seq")
+    @SequenceGenerator(name="imovel_seq", sequenceName="tb_imovel_id_seq")
     private Long id;
     @Column(name = "finalidade", nullable = false)
     private Integer finalidade;
+    @Column(name = "situacao", nullable = false)
+    private Integer situacao;
     @Column(name = "tipo", nullable = false)
     private Integer tipo;
     @Column(name = "nrDormitorios", nullable = false)
@@ -61,6 +65,14 @@ public class Imovel implements Serializable{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(Integer situacao) {
+        this.situacao = situacao;
     }
 
     public Integer getFinalidade() {

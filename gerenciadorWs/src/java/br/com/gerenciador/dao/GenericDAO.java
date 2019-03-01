@@ -5,11 +5,14 @@
  */
 package br.com.gerenciador.dao;
 
+import br.com.gerenciador.entity.Processo;
 import br.com.gerenciador.util.Conexao;
+import br.com.gerenciador.util.Paginator;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
 /**
  *
@@ -63,8 +66,22 @@ public abstract class GenericDAO<T, I extends Serializable> {
 
     @SuppressWarnings("unchecked")
     public List<T> getAll(Class<T> classe) {
-
+        
         return getEntityManager().createQuery("select o from " + classe.getSimpleName() + " o").getResultList();
+    }
+    
+    
+    @SuppressWarnings("unchecked")
+    public Integer count(T filtro) {
+        Integer count = (int) (long) getEntityManager().createQuery("select count(o.id) from " + this.getQuery(filtro)).getSingleResult();
+        return count != null ? count : 0;
+    }
+    
+    protected List<T> getPaginatedItens(String query, int first, int itensPPage){
+        Query q = this.getEntityManager().createQuery(query);
+        q.setFirstResult(first);
+        q.setMaxResults(itensPPage);
+        return q.getResultList();
     }
 
     public EntityManager getEntityManager() {
@@ -84,5 +101,16 @@ public abstract class GenericDAO<T, I extends Serializable> {
             return null;
         }
     }
+    
+    protected String removerCaracterEspecial(String x){
+        return x.replaceAll("'", "");
+    }
+    
+     public List<T> pesquisar(Paginator paginator) {
+        T filtro = (T) paginator.getFilter();
+        return this.getPaginatedItens("select o from " + this.getQuery(filtro) + " order by o.id", paginator.getFirst(), paginator.getItensPPage());
+    }
+    
+    protected abstract String getQuery(T filtro);
 
 }

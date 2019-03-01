@@ -7,18 +7,9 @@ package br.com.gerenciador.manangedbean;
 
 import br.com.gerenciador.dao.ImovelDAO;
 import br.com.gerenciador.entity.Imovel;
-import br.com.gerenciador.util.Util;
-import com.google.gson.Gson;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 /**
  *
@@ -26,47 +17,12 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean(name = "mbNewImovel")
 @ViewScoped
-public class MbNewImovel implements Serializable {
+public class MbNewImovel extends AbstractMbNew<Imovel> implements Serializable {
 
-    private Imovel novoImovel;
-    private ImovelDAO dao;
-    private boolean isEdit;
-
-    @PostConstruct
-    public void init() {
-        this.novoImovel = new Imovel();
-        this.dao = new ImovelDAO();
-        this.isEdit = false;
-        try {
-            this.novoImovel = this.dao.getImovel(Util.getIdFromRequest(FacesContext.getCurrentInstance().getExternalContext()));
-            System.out.println("Id " + this.novoImovel.getId());
-        } catch (IOException ex) {
-            Logger.getLogger(MbNewImovel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void salvar() throws IOException {
-        Gson g = new Gson();
-        String jsonImovel = g.toJson(this.novoImovel);
-        Util.sendPost("imovel/salvar", jsonImovel);
-        this.isEdit = true;
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro cadastrado com sucesso!", null));
-    }
-
-    public Imovel getNovoImovel() {
-        return novoImovel;
-    }
-
-    public void setNovoImovel(Imovel novoImovel) {
-        this.novoImovel = novoImovel;
-    }
-
-    public boolean isIsEdit() {
-        return isEdit;
-    }
-
-    public void setIsEdit(boolean isEdit) {
-        this.isEdit = isEdit;
+    @Override
+    protected void initPage() {
+        super.type = Imovel.class;
+        super.dao = new ImovelDAO();
     }
 
 }

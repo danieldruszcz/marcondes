@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition template="/pages/sistema/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="corpo">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-home"></i>
+                Condomínio - Novo! </div>
+            <div class="card-body">
+                <h:form id="newCondominio">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <div class="arrow-steps" currentvalue="#{mbNewCondominio.objetoSelecionado.situacao}">
+                                    <div class="step"> <span> Step 0</span> </div>
+                                    <div class="step"> <span> Step 1</span> </div>
+                                    <div class="step"> <span>Step 2 some words</span> </div>
+                                    <div class="step"> <span> Step 3</span> </div>
+                                    <div class="step"> <span>Step 4</span> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p:messages autoUpdate="true" closable="true"/>
+                    <c:if test="#{!mbNewCondominio.isEdit}">
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="col-md-6 col-sm-12 pull-right sit">
+                                        <div class="form-element form-select">
+                                            <h:selectOneMenu pt:id="situacao" class="form-element-field" value="#{mbNewCondominio.objetoSelecionado.situacao}">
+                                                <f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
+                                                <f:selectItem itemLabel="Step 1" itemValue="1"/>
+                                                <f:selectItem itemLabel="Step 2" itemValue="2"/>
+                                                <f:selectItem itemLabel="Step 3" itemValue="3"/>
+                                                <f:selectItem itemLabel="Step 4" itemValue="4"/>
+                                                <f:selectItem itemLabel="Step 5" itemValue="5"/>
+                                            </h:selectOneMenu>
+                                            <label class="form-element-label" for="situacao">Situação</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-9 col-sm-12">
+                                <div class="form-label-group">
+                                    <h:inputText pt:id="inputDescricao" class="form-control" pt:placeholder="Descricao" pt:required="required"
+                                                 value="#{mbNewCondominio.objetoSelecionado.descricao}" disabled="#{mbNewCondominio.isEdit}"/>
+                                    <label for="inputDescricao">Descricao</label>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 30px">
+                        <div class="form-row">
+                            <div class="col-md-10 col-sm"></div>
+                            <div class="col-md-2 col-sm-12 btn-bar">
+                                <h:commandLink class="btn btn-success btn-block" rendered="#{!mbNewCondominio.isEdit}">Salvar
+                                    <p:ajax listener="#{mbNewCondominio.salvar()}" process="@form" update="@form" oncomplete="selectElementVerify(); calcStep();"/>
+                                </h:commandLink>
+                                <h:commandLink class="btn btn-success btn-block" rendered="#{mbNewCondominio.isEdit}">Editar
+                                    <p:ajax listener="#{mbNewCondominio.setIsEdit(false)}" process="@this" update="@form" oncomplete="selectElementVerify()" />
+                                </h:commandLink>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

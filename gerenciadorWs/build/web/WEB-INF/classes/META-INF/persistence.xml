@@ -4,6 +4,9 @@
     <class>br.com.gerenciador.entity.Vendedor</class>
     <class>br.com.gerenciador.entity.Usuario</class>
     <class>br.com.gerenciador.entity.Imovel</class>
+    <class>br.com.gerenciador.entity.Condominio</class>
+    <class>br.com.gerenciador.entity.Obra</class>
+    <class>br.com.gerenciador.entity.Processo</class>
     <properties>
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>

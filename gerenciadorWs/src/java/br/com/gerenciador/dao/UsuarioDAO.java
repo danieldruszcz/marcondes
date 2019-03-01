@@ -18,14 +18,15 @@ public class UsuarioDAO extends GenericDAO<Usuario, Long> {
         return super.getById(Usuario.class, id);
     }
 
-    public List<Usuario> getListVendedor() {
-        return super.getAll(Usuario.class);
-    }
-
     public Usuario getUser(String login, String senha) {
         String query = "from Usuario as user"
                 + " where user.usuario = '" + login + "' and"
                 + " user.senha = '" + senha + "'";
         return (Usuario) this.selectUnique(query);
+    }
+
+    @Override
+    protected String getQuery(Usuario filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

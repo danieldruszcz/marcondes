@@ -14,6 +14,7 @@ import java.io.Serializable;
 public class Imovel implements Serializable{
     
     private Long id;
+    private Integer situacao;
     private Integer finalidade;
     private Integer tipo;
     private Integer nrDormitorios;
@@ -36,6 +37,14 @@ public class Imovel implements Serializable{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(Integer situacao) {
+        this.situacao = situacao;
     }
 
     public Integer getFinalidade() {

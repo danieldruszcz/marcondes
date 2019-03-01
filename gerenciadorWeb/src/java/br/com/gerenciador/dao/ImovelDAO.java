@@ -6,27 +6,21 @@
 package br.com.gerenciador.dao;
 
 import br.com.gerenciador.entity.Imovel;
-import br.com.gerenciador.util.Util;
-import com.google.gson.Gson;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  *
  * @author danieldruszcz
  */
-public class ImovelDAO implements Serializable{
+public class ImovelDAO extends GenericDAO<Imovel> implements Serializable{
     
-    public List<Imovel> list(Imovel filtro) throws IOException{
-        Gson g = new Gson();
-        String filtroJson = g.toJson(filtro);
-        String jsonResponse = Util.sendPost("imovel/list", filtroJson);
-        return (List<Imovel>) Util.jsonToArray(jsonResponse, Imovel[].class);
+    public ImovelDAO(){
+        super.clazz = Imovel[].class;
+        super.c = Imovel.class;
+        super.listOp = "imovel/search";
+        super.itemOp = "imovel/getById/";
+        super.countOp = "imovel/count";
+        super.saveOp = "imovel/salvar";
     }
     
-    public Imovel getImovel(Long id) throws IOException{
-        String jsonResponse = Util.sendGet("imovel/getById/" + id);
-        return (Imovel) Util.jsonToObject(jsonResponse, Imovel.class);
-    }
 }

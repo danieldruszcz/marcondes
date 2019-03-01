@@ -12,4 +12,9 @@ public class VendedorDAO extends GenericDAO<Vendedor, Long>{
    public List<Vendedor> getListVendedor(){
        return super.getAll(Vendedor.class);
    }
+
+    @Override
+    protected String getQuery(Vendedor filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
